@@ -50,8 +50,6 @@ export default class CharactersController {
             character.alive = payload.alive;
             character.team_id = payload.id;
 
-            
-
             await character.save();
     
             return response.status(201).json({ message: 'success...', data: character })
