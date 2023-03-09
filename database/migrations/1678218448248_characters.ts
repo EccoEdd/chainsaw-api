@@ -5,17 +5,20 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.createTable('characters', (table) => {
-      table.increments()
+      table.increments('id').primary()
       table.string('name', 15).notNullable()
       table.string('l_name', 15).nullable()
       table.string('type', 20).nullable()
       table.boolean('alive').defaultTo(true)
       table.integer('age').unsigned().nullable()
+
       table.integer('team_id').unsigned().notNullable()
+      
       table.foreign('team_id')
         .references('id')
         .inTable('teams')
         .onDelete('CASCADE')
+
       table.timestamps()
     })
   }

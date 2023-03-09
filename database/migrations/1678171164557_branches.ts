@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.createTable('branches', (table) => {
-      table.increments()
+      table.increments('id').primary()
       table.string('name', 45).unique().notNullable()
       table.string('location').unique().notNullable()
       table.timestamps()

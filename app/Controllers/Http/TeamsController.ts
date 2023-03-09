@@ -92,7 +92,7 @@ export default class TeamsController {
         }
     }
 
-    async deleteTeam({ response, params }) {
+    public async deleteTeam({ response, params }) {
         const team = await Team.find(params.id)
       
         if (!team)

@@ -46,7 +46,7 @@ export default class BranchesController {
         return response.status(202).json({ message: 'all the data...', data: branches })
     }
 
-    async updateBranch({ request, response, params }) {
+    public async updateBranch({ request, response, params }) {
         const branch = await Branch.find(params.id);
       
         if (!branch)

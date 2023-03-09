@@ -56,3 +56,13 @@ Route.group(() => {
   }).prefix('characters');
   
 }).prefix('api/chainsaw');
+
+Route.group(() => {
+
+  Route.group(() => {
+    Route.delete('logOut', 'UsersController.logout')
+  }).middleware(['auth', 'active', 'roles:v'])
+
+  Route.post('/logIn', 'UsersController.logIn')
+
+}).prefix('api/user');
