@@ -18,7 +18,7 @@ export default class extends BaseSeeder {
     user.password = 'admin'
     user.phone = '0000000000'
     user.active = true
-    user.role_id = 1
+    user.roleId = 1
 
     await user.save()
   }
