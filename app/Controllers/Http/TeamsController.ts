@@ -47,8 +47,8 @@ export default class TeamsController {
     }
     
     public async updateTeam( { request, response, params } ){
-            const team = await Team.find(params.id)
-            if(!team)
+        const team = await Team.find(params.id)
+        if(!team)
             return response.status(404).json({ message: 'error 404 not found' });
 
         const updateTeamSchema = schema.create({

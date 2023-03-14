@@ -26,7 +26,7 @@ export default class User extends BaseModel {
   public active: boolean
 
   @column()
-  public code: string
+  public code: number
 
   @column()
   public roleId: number

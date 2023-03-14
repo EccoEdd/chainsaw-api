@@ -25,7 +25,7 @@ Route.get('/', async () => {
 })
 
 //The order of the Middlewares alterates the final product beware!
-
+//Normal Crud
 Route.group(() => {
 
   Route.get('/demons/read', 'DemonsController.readDemons')
@@ -83,7 +83,7 @@ Route.group(() => {
   
 }).prefix('api/chainsaw').middleware(['auth', 'active']);
 
-
+//Crud Roles
 Route.group(() => {
   Route.get('get', 'RolesController.getRoles')
   Route.post('create', 'RolesController.createRole')
@@ -97,13 +97,46 @@ Route.group(() => {
   })
 }).prefix('api/roles').middleware(['auth', 'active', 'roles:a'])
 
-
+//User Crud/Controller
 Route.group(() => {
 
-  Route.post('/logIn', 'UsersController.logIn')
+  Route.post('logIn', 'UsersController.logIn')
+  Route.post('register', 'UsersController.register')
 
   Route.group(() => {
     Route.delete('logOut', 'UsersController.logout')
+    Route.get('check', 'UsersController.roleCheck')
+
+    Route.get('role',  'UsersController.getRole')
+
+    Route.group(() => {
+      Route.get('get', 'UsersController.checkUsers')
+      Route.put('update/:id', 'UsersController.modifyUser').where('id', {
+        match: /^[0-9]+$/,
+        cast: (id) => Number(id),
+      })
+      Route.delete('delete/:id', 'UsersController.deleteUser').where('id', {
+        match: /^[0-9]+$/,
+        cast: (id) => Number(id),
+      })
+    }).middleware('roles:a')
+
   }).middleware(['auth', 'active'])
 
+
+  //Signed middleware not found
+  Route.get('link/:id', 'UsersController.link').as('link')
+    .where('id', {
+      match: /^[0-9]+$/,
+      cast: (id) => Number(id),
+    })
+
+  Route.get('number/:id', 'UsersController.number').as('number')
+    .where('id', {
+      match: /^[0-9]+$/,
+      cast: (id) => Number(id)
+    })
+
 }).prefix('api/user');
+
+Route.get('viewPhone', 'NormalsController.viewCheck').as('viewPhone')
