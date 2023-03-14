@@ -123,7 +123,6 @@ Route.group(() => {
 
   }).middleware(['auth', 'active'])
 
-
   //Signed middleware not found
   Route.get('link/:id', 'UsersController.link').as('link')
     .where('id', {
